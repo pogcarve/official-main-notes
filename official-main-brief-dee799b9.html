@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>南宫28 · 日常查询与延伸阅读</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #f3f5f7;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #2c3e50;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page {
+            max-width: 960px;
+            width: 100%;
+        }
+        /* 柔和开场区 */
+        .prelude {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2.5rem 2rem 2rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03), 0 1px 3px rgba(0, 0, 0, 0.04);
+            margin-bottom: 2rem;
+            border: 1px solid #e9edf2;
+            transition: box-shadow 0.2s;
+        }
+        .prelude:hover {
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.05);
+        }
+        .prelude .short-sentence {
+            font-size: 1.35rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            color: #3a4b5c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed #dce3ea;
+            line-height: 1.6;
+        }
+        .prelude .short-sentence span {
+            background: #ecf0f3;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            color: #1f2a36;
+            font-weight: 440;
+            font-size: 0.95em;
+        }
+        .prelude .carry-on {
+            color: #405a6f;
+            font-size: 1rem;
+        }
+        .prelude .carry-on p {
+            margin-bottom: 1.1rem;
+        }
+        .prelude .carry-on p:last-child {
+            margin-bottom: 0;
+        }
+        .prelude .carry-on a {
+            color: #1a5a7a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid #b6cbd9;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        .prelude .carry-on a:hover {
+            border-bottom-color: #1a5a7a;
+            color: #0a3a52;
+        }
+        /* 特点卡片网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .feature-card {
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 1.8rem 1.5rem 1.8rem;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+        }
+        .feature-card h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: #2a3b4c;
+            letter-spacing: 0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .feature-card h3::before {
+            content: "·";
+            font-weight: 700;
+            color: #7a8b9e;
+            font-size: 1.6rem;
+            line-height: 1;
+            margin-right: 0.2rem;
+        }
+        .feature-card p {
+            color: #4d5f70;
+            font-size: 0.95rem;
+        }
+        /* 温和提示 / 场景块 (双栏) */
+        .scenes-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .scene-item {
+            flex: 1 1 240px;
+            background: #ffffff;
+            border-radius: 22px;
+            padding: 1.8rem 1.6rem;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+        .scene-item h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #2e4255;
+            margin-bottom: 0.7rem;
+            border-left: 4px solid #b3c6d6;
+            padding-left: 0.8rem;
+        }
+        .scene-item p {
+            font-size: 0.95rem;
+            color: #3f5567;
+        }
+        /* FAQ 摘要 */
+        .faq-digest {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 2rem 2rem 1.8rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+            border: 1px solid #e9edf2;
+            margin-bottom: 2rem;
+        }
+        .faq-digest h2 {
+            font-size: 1.3rem;
+            font-weight: 480;
+            margin-bottom: 1.5rem;
+            color: #1f313f;
+            letter-spacing: 0.01em;
+        }
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+        .faq-q {
+            font-weight: 500;
+            color: #1f2e3c;
+            margin-bottom: 0.2rem;
+            font-size: 1rem;
+        }
+        .faq-a {
+            color: #4f6579;
+            font-size: 0.94rem;
+            line-height: 1.6;
+        }
+        .faq-a a {
+            color: #1a5a7a;
+            text-decoration: none;
+            border-bottom: 1px solid #cbdae7;
+        }
+        .faq-a a:hover {
+            border-bottom-color: #1a5a7a;
+        }
+        /* 温和结尾 */
+        .gentle-footer {
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 1.8rem 2rem;
+            border: 1px solid #e9edf2;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+            color: #476072;
+        }
+        .gentle-footer a {
+            color: #1a5a7a;
+            text-decoration: none;
+            border-bottom: 1px solid #b9cfdf;
+            font-weight: 450;
+        }
+        .gentle-footer a:hover {
+            border-bottom-color: #1a5a7a;
+        }
+        .gentle-footer .small-note {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: #7f93a5;
+            border-top: 1px solid #e7edf2;
+            padding-top: 0.7rem;
+        }
+        hr {
+            border: none;
+            border-top: 1px solid #e3e9ef;
+            margin: 1.2rem 0 1.8rem;
+        }
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.75rem;
+            }
+            .prelude {
+                padding: 1.8rem 1.2rem 1.5rem;
+            }
+            .prelude .short-sentence {
+                font-size: 1.2rem;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .scenes-wrapper {
+                flex-direction: column;
+            }
+            .faq-digest {
+                padding: 1.5rem 1.2rem;
+            }
+            .gentle-footer {
+                padding: 1.5rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 开场短句 -->
+    <div class="prelude">
+        <div class="short-sentence">
+            <span>日常查询 · 对照 · 延伸</span> —— 一个安静停留的起点
+        </div>
+        <div class="carry-on">
+            <p>有时候只是需要一个可靠的地方，把零散的信息拼合起来。无论是确认某个细节，还是寻找更完整的上下文，兜兜转转总会回到熟悉的位置。<a href="https://official-main-nangong28.com">南宫28</a> 像是一本翻旧了的备忘册，内容就放在那里，不急不缓。</p>
+            <p>不需要刻意记住什么，需要的时候自然会想起。从一次简单的对照，到后来习惯性的延伸阅读，很多片段就是这样慢慢连成线的。</p>
+        </div>
+    </div>
+
+    <!-- 特点列表卡片 -->
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>条目清晰</h3>
+            <p>信息按主题归类，前后关联自然。查阅时不费力，也不会被无关内容打断思路。</p>
+        </div>
+        <div class="feature-card">
+            <h3>节奏自在</h3>
+            <p>没有催促感，也没有多余的装饰。翻看时像在翻一本纸页微黄的笔记本，安静而专注。</p>
+        </div>
+        <div class="feature-card">
+            <h3>延伸有度</h3>
+            <p>每一条线索都留有余地，可以顺着往下读，也可以停在原地。不堆砌，不冗余。</p>
+        </div>
+        <div class="feature-card">
+            <h3>保持距离</h3>
+            <p>不追踪，不标记。你来或不来，它都在那里，保持着最初的样子。</p>
+        </div>
+    </div>
+
+    <!-- 场景温和提示 双栏 -->
+    <div class="scenes-wrapper">
+        <div class="scene-item">
+            <h4>日常对照</h4>
+            <p>记录了一些常见条目，方便来回比对。像是桌上的参考卡片，需要时随手抽出来，用完放回去。</p>
+        </div>
+        <div class="scene-item">
+            <h4>延伸阅读</h4>
+            <p>从一条短记出发，慢慢扩展到更宽的范围。没有固定的路线，全凭当时的兴趣和需要。</p>
+        </div>
+        <div class="scene-item">
+            <h4>片段整理</h4>
+            <p>偶尔翻到以前留下的注释，会有一种「原来当时是这样想的」的感觉。时间久了，这些片段就构成了自己的脉络。</p>
+        </div>
+        <div class="scene-item">
+            <h4>安静空间</h4>
+            <p>没有弹窗，没有闪烁的提示。页面像一本书的内页，翻开就是内容，合上就是休息。</p>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要 (温和版) -->
+    <div class="faq-digest">
+        <h2>一些常被问起的事</h2>
+        <div class="faq-item">
+            <div class="faq-q">这里适合用来做什么？</div>
+            <div class="faq-a">日常查询、信息对照、或者漫无目的地翻阅。不需要特定目的，来了就是客人。<a href="https://official-main-nangong28.com">南宫28</a> 一直开着门。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">信息更新频繁吗？</div>
+            <div class="faq-a">保持适当的更新节奏，不追求日更，但会保证内容的延续性。每次变动都留有记录。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">需要注册或登录吗？</div>
+            <div class="faq-a">不需要。打开页面即可阅读，没有任何门槛或要求。你只是你。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">有移动端的版本吗？</div>
+            <div class="faq-a">页面本身适应不同屏幕，手机、平板、电脑都能顺畅浏览。没有独立 app，但浏览器就够了。</div>
+        </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="gentle-footer">
+        从一次简单的查阅，到慢慢养成的习惯。<a href="https://official-main-nangong28.com">南宫28</a> 就在这里，不声不响。
+        <span class="small-note">不需要记住地址，手指会有记忆。</span>
+    </div>
+</div>
+</body>
+</html>
